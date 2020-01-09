@@ -22,12 +22,15 @@ const findSteps = (id) => {
 }
 
 const add = async (scheme) => {
+    // we destructure the array and indicate which table we want to insert an entry into. Then we return the entry that we added by using a function we've already defined (findById)
     const [id] = await db('schemes')
                 .insert(scheme)
     return findById(id)
 }
 
+
 const update = async (changes, id) => {
+    //very similar to add, though in this case we have to specify id as being the object we're looking to update. Once we've found it, we update it and then return the updated object by finding it by Id.
     await db('schemes')
         .where({ id })
         .update(changes)
@@ -35,6 +38,7 @@ const update = async (changes, id) => {
 }
 
 const remove = (id) => {
+    //simpler than others. We look for the correct entry via Id, then delete it.
     return db('schemes')
         .where({ id })
         .del()
